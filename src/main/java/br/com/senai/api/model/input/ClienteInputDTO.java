@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class ClienteModel {
+public class ClienteInputDTO {
 
     @NotNull
     private Long id;

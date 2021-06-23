@@ -1,7 +1,7 @@
 package br.com.senai.domain.service;
 
 import br.com.senai.api.assembler.EntregaAssembler;
-import br.com.senai.api.model.EntregaModel;
+import br.com.senai.api.model.EntregaDTO;
 import br.com.senai.domain.exception.NegocioException;
 import br.com.senai.domain.model.Entrega;
 import br.com.senai.domain.model.Pessoa;
@@ -36,19 +36,19 @@ public class SolicitacaoEntregaService {
         return entregaRepository.save(entrega);
     }
 
-    public List<EntregaModel> listar(){
+    public List<EntregaDTO> listar(){
         return entregaAssembler.toCollection(entregaRepository.findAll());
     }
 
 
-    public ResponseEntity<EntregaModel> buscar(Long entregaId){
+    public ResponseEntity<EntregaDTO> buscar(Long entregaId){
         return entregaRepository.findById(entregaId)
                 .map(entrega -> {
-//                    EntregaModel entregaModel = new EntregaModel();
+//                    EntregaDTO entregaModel = new EntregaDTO();
 //
 //                    entregaModel.setId(entrega.getId());
 //                    entregaModel.setNomePessoa(entrega.getPessoa().getNome());
-//                    entregaModel.setDestinatario(new DestinatarioModel());
+//                    entregaModel.setDestinatario(new DestinatarioDTO());
 //                    entregaModel.getDestinatario().setNome(entrega.getDestinatario().getNome());
 //                    entregaModel.getDestinatario().setLogradouro(entrega.getDestinatario().getLogradouro());
 //                    entregaModel.getDestinatario().setNumero(entrega.getDestinatario().getNumero());

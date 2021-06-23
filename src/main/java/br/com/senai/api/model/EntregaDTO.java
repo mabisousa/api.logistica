@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class EntregaModel {
+public class EntregaDTO {
 
     private Long id;
     private Pessoa pessoa;
-    private DestinatarioModel destinatario;
+    private DestinatarioDTO destinatario;
     private BigDecimal taxa;
     private LocalDateTime dataPedido;
     private LocalDateTime dataFinalizacao;

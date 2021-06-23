@@ -7,8 +7,11 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-public class OcorrenciaInput {
+public class UsuarioInputDTO {
 
     @NotBlank
-    private String descricao;
+    private String email;
+
+    @NotBlank
+    private String senha;
 }
