@@ -10,7 +10,6 @@ import lombok.experimental.FieldDefaults;
 import static lombok.AccessLevel.PRIVATE;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,11 +25,11 @@ public class Pessoa {
     @NotNull(groups = ValidationGroups.ClienteId.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     long id;
+    private long id;
 
     @NotBlank
     @Size(max = 50)
-     String nome;
+    private String nome;
 
 //    @NotBlank
 //    @Email
@@ -39,10 +38,10 @@ public class Pessoa {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
-    Usuario usuario;
+    private Usuario usuario;
 
     @NotBlank
     @Size(min = 14)
-     String telefone;
+    private String telefone;
 
 }

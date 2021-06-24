@@ -4,7 +4,6 @@ import br.com.senai.api.assembler.EntregaAssembler;
 import br.com.senai.api.model.EntregaDTO;
 import br.com.senai.api.model.input.EntregaInputDTO;
 import br.com.senai.domain.model.Entrega;
-import br.com.senai.domain.model.StatusEntrega;
 import br.com.senai.domain.service.EntregaService;
 import br.com.senai.domain.service.SolicitacaoEntregaService;
 import lombok.AllArgsConstructor;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor

@@ -20,6 +20,7 @@ public class Usuario implements UserDetails {
 
     private String email;
     private String senha;
+    private String perfil;
 
     @ManyToMany
     @JoinTable(name = "role_usuarios",

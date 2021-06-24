@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 public class EntregaDTO {
 
     private Long id;
-    private Pessoa pessoa;
+    private PessoaDTO pessoa;
     private DestinatarioDTO destinatario;
     private BigDecimal taxa;
     private LocalDateTime dataPedido;
     private LocalDateTime dataFinalizacao;
-    private StatusEntrega statusModel;
+    private StatusEntrega status;
 
 }

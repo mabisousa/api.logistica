@@ -1,7 +1,6 @@
 package br.com.senai.domain.service;
 
 import br.com.senai.domain.exception.EntidadeNaoEncontradaException;
-import br.com.senai.domain.exception.NegocioException;
 import br.com.senai.domain.model.Entrega;
 import br.com.senai.domain.repository.EntregaRepository;
 import lombok.AllArgsConstructor;
