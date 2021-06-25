@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/pessoas/{pessoaId}",
             "/roles",
             "/roles/{nomeRole}",
-            "/entregas"
+            "/role_usuarios/{roleUsuarioId}"
     };
 
     @Override

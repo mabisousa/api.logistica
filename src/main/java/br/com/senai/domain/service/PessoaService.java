@@ -4,6 +4,7 @@ import br.com.senai.api.assembler.PessoaAssembler;
 import br.com.senai.api.model.PessoaDTO;
 import br.com.senai.domain.exception.NegocioException;
 import br.com.senai.domain.model.Pessoa;
+import br.com.senai.domain.model.RoleUsuarios;
 import br.com.senai.domain.repository.PessoaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ public class PessoaService extends PessoaDTO {
 
     private PessoaRepository pessoaRepository;
     private PessoaAssembler pessoaAssembler;
+    private RoleUsuariosService roleUsuariosService;
 
     public List<PessoaDTO> listar(){
         return pessoaAssembler.toCollection(pessoaRepository.findAll());
@@ -44,15 +46,18 @@ public class PessoaService extends PessoaDTO {
     }
 
     @Transactional
-    public Pessoa cadastrar(@Valid Pessoa pessoa) {
+    public Pessoa cadastrar(Pessoa pessoa) {
 
-//        boolean emailValidation = pessoaRepository.findByEmail(pessoa.getEmail()).isPresent();
-//
-//        if (emailValidation) {
-//            throw new NegocioException("Já existe uma pessoa com este e-mail cadastrado");
-//        }
+        Pessoa novaPessoa = pessoaRepository.save(pessoa);
 
-        return pessoaRepository.save(pessoa);
+        RoleUsuarios novaRole = new RoleUsuarios();
+
+        novaRole.setUsuarios_id(novaPessoa.getUsuario().getId());
+        novaRole.setRole_nome_role("ROLE_USER");
+
+        roleUsuariosService.cadastrar(novaRole);
+
+        return novaPessoa;
     }
 
     @Transactional

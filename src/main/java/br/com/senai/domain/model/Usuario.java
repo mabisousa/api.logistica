@@ -20,12 +20,11 @@ public class Usuario implements UserDetails {
 
     private String email;
     private String senha;
-    private String perfil;
 
     @ManyToMany
-    @JoinTable(name = "role_usuarios",
-            joinColumns = @JoinColumn(name = "usuarios_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_nome_role", referencedColumnName = "nomeRole"))
+    @JoinTable(name = "role_usuarios", joinColumns = @JoinColumn(name = "usuarios_id",
+            referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_nome_role",referencedColumnName = "nomeRole"))
     private List<Role> roles;
 
     @Override
