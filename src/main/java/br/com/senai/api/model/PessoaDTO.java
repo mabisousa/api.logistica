@@ -8,7 +8,6 @@ import lombok.Setter;
 public class PessoaDTO {
 
     private String nome;
-    private String telefone;
     private UsuarioDTO usuario;
-
+    private String telefone;
 }

@@ -12,4 +12,5 @@ public class OcorrenciaDTO {
     private Long id;
     private String descricao;
     private LocalDateTime dataRegistro;
+
 }

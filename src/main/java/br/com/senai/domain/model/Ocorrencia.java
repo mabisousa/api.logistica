@@ -6,9 +6,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Getter
 @Setter
+@Getter
+@Entity
 public class Ocorrencia {
 
     @Id
@@ -19,7 +19,6 @@ public class Ocorrencia {
     private Entrega entrega;
 
     private String descricao;
-
     private LocalDateTime dataRegistro;
 
 }

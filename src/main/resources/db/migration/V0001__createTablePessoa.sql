@@ -3,5 +3,5 @@ CREATE TABLE pessoa(
     nome varchar(100) not null,
     email varchar(100) not null,
     telefone varchar(45) not null,
-      primary key (id)
+    primary key (id)
 );

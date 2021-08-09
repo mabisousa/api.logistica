@@ -14,19 +14,19 @@ import java.util.stream.Collectors;
 @Component
 public class PessoaAssembler {
 
-    private ModelMapper modelMapper;
+    ModelMapper modelMapper;
 
     public PessoaDTO toModel(Pessoa pessoa){
         return modelMapper.map(pessoa, PessoaDTO.class);
     }
 
-    public List<PessoaDTO> toCollection(List<Pessoa> pessoa){
-        return pessoa.stream().map(this::toModel)
-                .collect(Collectors.toList());
-    }
-
     public Pessoa toEntity(PessoaInputDTO pessoaInputDTO){
         return modelMapper.map(pessoaInputDTO, Pessoa.class);
+    }
+
+    public List<PessoaDTO> toCollectionModel(List<Pessoa> pessoas){
+        return pessoas.stream().map(this::toModel)
+                .collect(Collectors.toList());
     }
 
 }

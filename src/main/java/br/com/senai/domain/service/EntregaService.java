@@ -1,6 +1,7 @@
 package br.com.senai.domain.service;
 
 import br.com.senai.domain.exception.EntidadeNaoEncontradaException;
+import br.com.senai.domain.exception.NegocioException;
 import br.com.senai.domain.model.Entrega;
 import br.com.senai.domain.repository.EntregaRepository;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ public class EntregaService {
     @Transactional
     public void finalizar(Long entregaId){
         Entrega entrega = buscaEntrega(entregaId);
+
         entrega.finalizar();
 
         entregaRepository.save(entrega);
@@ -23,6 +25,6 @@ public class EntregaService {
 
     public Entrega buscaEntrega(Long entregaId){
         return entregaRepository.findById(entregaId)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Entrega não econtrada."));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Entrega não encontrada."));
     }
 }

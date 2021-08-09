@@ -25,8 +25,11 @@ public class OcorrenciaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public OcorrenciaDTO registrar(@PathVariable Long entregaId, @Valid @RequestBody OcorrenciaInputDTO ocorrenciaInputDTO){
-        Ocorrencia ocorrenciaRegistrada = ocorrenciaService.registrar(entregaId, ocorrenciaInputDTO.getDescricao());
+    public OcorrenciaDTO registrar(
+            @PathVariable Long entregaId,
+            @Valid @RequestBody OcorrenciaInputDTO ocorrenciaInputDTO){
+        Ocorrencia ocorrenciaRegistrada = ocorrenciaService
+                .registrar(entregaId, ocorrenciaInputDTO.getDescricao());
 
         return ocorrenciaAssembler.toModel(ocorrenciaRegistrada);
     }
@@ -35,6 +38,7 @@ public class OcorrenciaController {
     public List<OcorrenciaDTO> listar(@PathVariable Long entregaId){
         Entrega entrega = entregaService.buscaEntrega(entregaId);
 
-        return ocorrenciaAssembler.toCollection(entrega.getOcorrencias());
+        return ocorrenciaAssembler.toCollectionModel(entrega.getOcorrencias());
     }
+
 }

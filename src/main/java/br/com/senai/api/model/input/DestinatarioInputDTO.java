@@ -10,16 +10,17 @@ import javax.validation.constraints.NotBlank;
 public class DestinatarioInputDTO {
 
     @NotBlank
-    public String nome;
+    private String nome;
 
     @NotBlank
-    public String logradouro;
+    private String logradouro;
 
     @NotBlank
-    public String numero;
-
-    public String complemento;
+    private String numero;
 
     @NotBlank
-    public String bairro;
+    private String complemento;
+
+    @NotBlank
+    private String bairro;
 }

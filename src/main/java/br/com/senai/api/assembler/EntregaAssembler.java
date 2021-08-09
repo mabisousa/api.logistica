@@ -20,8 +20,9 @@ public class EntregaAssembler {
         return modelMapper.map(entrega, EntregaDTO.class);
     }
 
-    public List<EntregaDTO> toCollection(List<Entrega> entregas){
-        return entregas.stream().map(this::toModel)
+    public List<EntregaDTO> toCollectionModel(List<Entrega> entregas){
+        return entregas.stream()
+                .map(this::toModel)
                 .collect(Collectors.toList());
     }
 

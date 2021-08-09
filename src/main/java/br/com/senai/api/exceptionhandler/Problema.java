@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 public class Problema {
 
-    private Integer Status;
+    private Integer status;
     private LocalDateTime dataHora;
     private String titulo;
     private List<Campo> campos;
@@ -23,6 +23,5 @@ public class Problema {
     public static class Campo{
         private String nome;
         private String mensagem;
-
     }
 }
