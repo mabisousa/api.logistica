@@ -10,5 +10,4 @@ public class AuthenticationResponse {
 
     private String jwt;
     private UsuarioDTO usuario;
-
 }

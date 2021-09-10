@@ -1,8 +1,8 @@
 package br.com.senai.api.controller;
 
 import br.com.senai.api.assembler.EntregaAssembler;
+import br.com.senai.api.input.EntregaInputDTO;
 import br.com.senai.api.model.EntregaDTO;
-import br.com.senai.api.model.input.EntregaInputDTO;
 import br.com.senai.domain.model.Entrega;
 import br.com.senai.domain.service.EntregaService;
 import br.com.senai.domain.service.SolicitacaoEntregaService;
@@ -23,28 +23,31 @@ public class EntregaController {
 	private EntregaAssembler entregaAssembler;
 	private EntregaService entregaService;
 
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public EntregaDTO solicitar(@Valid @RequestBody EntregaInputDTO entregaInputDTO){
 		Entrega novaEntrega = entregaAssembler.toEntity(entregaInputDTO);
-		Entrega entrega = solicitacaoEntregaService.solicitar(novaEntrega);
-
-		return entregaAssembler.toModel(entrega);
+		Entrega entregaSolicitada = solicitacaoEntregaService.solicitar(novaEntrega);
+		return entregaAssembler.toModel(entregaSolicitada);
 	}
 
 	@GetMapping
-	public List<EntregaDTO> listar(){
+	public List<EntregaDTO> listar() {
 		return solicitacaoEntregaService.listar();
 	}
 
-	@GetMapping("/{entregaId}")
-	public ResponseEntity<EntregaDTO> buscar(@PathVariable Long entregaId){
-		return solicitacaoEntregaService.buscar(entregaId);
+
+	@GetMapping("/{entregaID}")
+	public ResponseEntity<EntregaDTO> buscar(@PathVariable Long entregaID) {
+		return solicitacaoEntregaService.buscar(entregaID);
 	}
 
 	@PutMapping("/{entregaId}/finalizacao")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void finalizar(@PathVariable Long entregaId){
+	public void finalizar(@PathVariable Long entregaId) {
 		entregaService.finalizar(entregaId);
 	}
+
+
 }

@@ -1,5 +1,6 @@
 package br.com.senai.api.model;
 
+
 import lombok.Getter;
 import lombok.Setter;
 

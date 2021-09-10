@@ -1,6 +1,6 @@
 package br.com.senai.api.exceptionhandler;
 
-import br.com.senai.domain.exception.EntidadeNaoEncontradaException;
+import br.com.senai.domain.exception.EntidadeNaoEncontradException;
 import br.com.senai.domain.exception.NegocioException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -72,10 +72,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 request);
     }
 
-    @ExceptionHandler(EntidadeNaoEncontradaException.class)
-    public ResponseEntity<Object> handleEntidadeNaoEncontradaException(
-            EntidadeNaoEncontradaException ex,
-            WebRequest request){
+    @ExceptionHandler(EntidadeNaoEncontradException.class)
+    public ResponseEntity<Object>  handleEntidadeNaoEncontradException(
+            EntidadeNaoEncontradException ex,
+            WebRequest request
+    ){
         HttpStatus status = HttpStatus.NOT_FOUND;
 
         Problema problema = new Problema();
@@ -83,6 +84,10 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         problema.setDataHora(LocalDateTime.now());
         problema.setTitulo(ex.getMessage());
 
-        return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+        return handleExceptionInternal(ex,
+                problema,
+                new HttpHeaders(),
+                status,
+                request);
     }
 }

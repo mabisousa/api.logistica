@@ -22,10 +22,9 @@ public class ImplementsUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findByEmail(email);
 
-        if(usuario == null){
-            throw new NegocioException("Usuário ou senha inválido.");
+        if(usuario == null) {
+            throw new NegocioException("Usuario ou senha inválido");
         }
-
         return new User(
                 usuario.getUsername(),
                 usuario.getPassword(),

@@ -1,11 +1,13 @@
 package br.com.senai.domain.service;
 
 import br.com.senai.api.assembler.EntregaAssembler;
+import br.com.senai.api.assembler.PessoaAssembler;
 import br.com.senai.api.model.EntregaDTO;
+import br.com.senai.api.model.PessoaDTO;
 import br.com.senai.domain.model.Entrega;
-import br.com.senai.domain.model.Pessoa;
 import br.com.senai.domain.model.StatusEntrega;
 import br.com.senai.domain.repository.EntregaRepository;
+import br.com.senai.domain.repository.PessoaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,27 +23,27 @@ public class SolicitacaoEntregaService {
 	private PessoaService pessoaService;
 	private EntregaRepository entregaRepository;
 	private EntregaAssembler entregaAssembler;
+	private PessoaAssembler pessoaAssembler;
+	private PessoaRepository pessoaRepository;
 
 	@Transactional
 	public Entrega solicitar(Entrega entrega){
-		Pessoa pessoa = pessoaService.buscar(entrega.getPessoa().getId());
-		entrega.setPessoa(pessoa);
+		PessoaDTO pessoa = pessoaService.buscar(entrega.getPessoa().getId()).getBody();
 
+		entrega.setPessoa(pessoaAssembler.toEntityFromModel(pessoa));
 		entrega.setStatus(StatusEntrega.PENDENTE);
 		entrega.setDataPedido(LocalDateTime.now());
 
 		return entregaRepository.save(entrega);
 	}
-
 	public List<EntregaDTO> listar() {
-		return entregaAssembler.toCollectionModel(entregaRepository.findAll());
+			return entregaAssembler.toCollectionModel(entregaRepository.findAll());
 	}
 
-	public ResponseEntity<EntregaDTO> buscar(Long entregaId) {
-		return entregaRepository.findById(entregaId)
-				.map(entrega -> {
+	public ResponseEntity<EntregaDTO> buscar(Long entregaID) {
+		return entregaRepository.findById(entregaID).map
+				(entrega -> {
 					return ResponseEntity.ok(entregaAssembler.toModel(entrega));
-				})
-				.orElse(ResponseEntity.notFound().build());
+				}).orElse(ResponseEntity.notFound().build());
 	}
 }

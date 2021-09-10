@@ -19,6 +19,7 @@ public class Ocorrencia {
     private Entrega entrega;
 
     private String descricao;
+
     private LocalDateTime dataRegistro;
 
 }

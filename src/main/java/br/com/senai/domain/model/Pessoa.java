@@ -1,18 +1,17 @@
 package br.com.senai.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import br.com.senai.domain.ValidationGroups;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import static lombok.AccessLevel.PRIVATE;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +20,8 @@ import javax.validation.constraints.Size;
 @Setter
 @Entity
 public class Pessoa {
-
+    @Valid
+    @NotNull(groups = ValidationGroups.clienteID.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
@@ -44,3 +44,4 @@ public class Pessoa {
     String telefone;
 
 }
+

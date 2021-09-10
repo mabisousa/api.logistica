@@ -1,2 +1,1 @@
-ALTER TABLE pessoa
-DROP COLUMN email;
+alter table pessoa drop column email;

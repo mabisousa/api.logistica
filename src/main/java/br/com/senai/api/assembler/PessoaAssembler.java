@@ -1,7 +1,7 @@
 package br.com.senai.api.assembler;
 
 import br.com.senai.api.model.PessoaDTO;
-import br.com.senai.api.model.input.PessoaInputDTO;
+import br.com.senai.api.input.PessoaInputDTO;
 import br.com.senai.domain.model.Pessoa;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -14,19 +14,21 @@ import java.util.stream.Collectors;
 @Component
 public class PessoaAssembler {
 
-    ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
-    public PessoaDTO toModel(Pessoa pessoa){
+    public PessoaDTO toModel(Pessoa pessoa) {
         return modelMapper.map(pessoa, PessoaDTO.class);
     }
 
-    public Pessoa toEntity(PessoaInputDTO pessoaInputDTO){
+    public List<PessoaDTO> toCollectionModel(List<Pessoa> pessoas) {
+        return pessoas.stream().map(this::toModel).collect(Collectors.toList());
+    }
+    public Pessoa toEntity(PessoaInputDTO pessoaInputDTO) {
         return modelMapper.map(pessoaInputDTO, Pessoa.class);
     }
 
-    public List<PessoaDTO> toCollectionModel(List<Pessoa> pessoas){
-        return pessoas.stream().map(this::toModel)
-                .collect(Collectors.toList());
+    public Pessoa toEntityFromModel(PessoaDTO pessoaDTO) {
+        return modelMapper.map(pessoaDTO, Pessoa.class);
     }
 
 }

@@ -1,29 +1,30 @@
 package br.com.senai.domain.service;
 
+
 import br.com.senai.api.assembler.RoleAssembler;
+import br.com.senai.api.model.PessoaDTO;
 import br.com.senai.api.model.RoleDTO;
 import br.com.senai.domain.model.Role;
+import br.com.senai.domain.model.Usuario;
 import br.com.senai.domain.repository.RoleRepository;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.Valid;
 import java.util.List;
 
-@AllArgsConstructor
 @Service
-public class RoleService extends RoleDTO{
+@AllArgsConstructor
+public class RoleService {
 
-    private RoleAssembler roleAssembler;
     private RoleRepository roleRepository;
+    private RoleAssembler roleAssembler;
 
-    public List<RoleDTO> listar(){
-        return roleAssembler.toCollection(roleRepository.findAll());
-    }
+    public List<RoleDTO> listar() { return roleAssembler.toCollection(roleRepository.findAll()); }
 
-    @Transactional
-    public Role cadastrar(@Valid Role role) {
+    public Role cadastrar(Role role) {
         return roleRepository.save(role);
     }
 
@@ -31,8 +32,23 @@ public class RoleService extends RoleDTO{
         roleRepository.deleteById(role);
     }
 
-    public Role editar(Role role, String nomeRole){
-        role.setNomeRole(nomeRole);
-        return roleRepository.save(role);
+    public ResponseEntity<RoleDTO> editar(String name_role, Role role) {
+
+        if(!roleRepository.existsById(name_role)) {
+            return ResponseEntity.notFound().build();
+        }
+        role.setNomeRole(name_role);
+        roleRepository.save(role);
+        RoleDTO roleDTO = roleAssembler.toDTO(role);
+
+        return ResponseEntity.ok(roleDTO);
+    }
+    public Usuario inserir() {
+        return null;
+    }
+    public ResponseEntity<Role> buscar(String role) {
+        return roleRepository.findById(role).map(rolefind ->
+        {return ResponseEntity.ok(rolefind);}
+        ).orElse(ResponseEntity.notFound().build());
     }
 }
